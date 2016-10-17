@@ -131,6 +131,9 @@ function categoryScrap() {
                     imgURL = this.evaluate(function (subCategoryFolder,categoryFolder) {
                         var tempArr = '';
                         var breadCrumb = document.querySelector('div.l-grid.l-grid-sub.l-grid-extra > div.l-col-main > div > div:nth-child(1) > div > div');
+						var i = docuemnt.querySelectory('body');
+						i = i.replace(/[\\"]/g, '\\$&').replace(/\u0000/g, '\\0').replace(/\s+/g," ").replace(/\n+/g," ");
+						
                         var temp = document.querySelectorAll('.m-gallery-product-item img');
                         for (var iterate = 0; iterate < temp.length; iterate++) {
                             tempArr += '{"folder":"' + categoryFolder + '","subfolder":"' + subCategoryFolder + '","url":"' + temp[iterate].parentElement.getAttribute('href') + '","src":"' + temp[iterate].getAttribute('src') + '","breadCrumb":"' + 'breadCrumb.textContent' + '","done":"false"}';
