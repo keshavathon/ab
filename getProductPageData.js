@@ -131,7 +131,7 @@ function categoryScrap() {
                     imgURL = this.evaluate(function (subCategoryFolder,categoryFolder) {
                         var tempArr = '';
                         var breadCrumb = document.querySelector('div.l-grid.l-grid-sub.l-grid-extra > div.l-col-main > div > div:nth-child(1) > div > div');
-						var i = docuemnt.querySelectory('body');
+						var i = document.querySelector('body').innerHTML;
 						i = i.replace(/[\\"]/g, '\\$&').replace(/\u0000/g, '\\0').replace(/\s+/g," ").replace(/\n+/g," ");
 						
                         var temp = document.querySelectorAll('.m-gallery-product-item img');
@@ -155,7 +155,9 @@ function categoryScrap() {
                     casper.capture('screebshot/secondpage' + count + '.png');
                     count++;
                 })
-                casper.wait(10000, function () {});
+                casper.wait(10000, function () {
+					console.log('Done Waiting'+exitF);
+				});
                 casper.thenOpen('https://www.alibaba.com/catalogs/products/CID' + urlPrefix + '----------------------------G/' + count);
             }
             casper.run(function () {
@@ -165,7 +167,7 @@ function categoryScrap() {
                     primIndex++;
                     categoryScrap();
                 }
-                else if (exitF == true) {
+                else {
                     console.log('Continue in same category.');
                     scrap();
                 }
